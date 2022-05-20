@@ -7,19 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />'
     <link rel="stylesheet" type="text/css" href="../StyleSheet/StyleSheet1.css" />
 </head>
-<body id="window">
+<body>
 
     <div class="content-wrapper">
         <!-- Trigger/Open The Modal -->
-        <div class="content-mbutton-wrapper">
-            <a id="modal-btn1" class="modal-button">Open modal</a>
-            <a id="modal-btn2" class="modal-button">Open modal</a>
-            <a id="modal-btn3" class="modal-button">Open modal</a>
-            <a id="modal-btn4" class="modal-button">Open modal</a>
-            <a id="modal-btn5" class="modal-button">Open modal</a>
-            <a id="modal-btn6" class="modal-button">Open modal</a>
-            <a id="modal-btn7" class="modal-button">Open modal</a>
-            <a id="modal-btn8" class="modal-button">Open modal</a>
+        <div class="mbutton-grid-wrapper">
+            <div class="mbutton-wrapper">
+                <a id="modal-btn1" class="modal-button"><img id="btn1-img" class="btn-img" src="/" /></a>
+                <a id="modal-btn2" class="modal-button"><img id="btn2-img" class="btn-img" src="/" /></a>
+                <a id="modal-btn3" class="modal-button"><img id="btn3-img" class="btn-img" src="/" /></a>
+                <a id="modal-btn4" class="modal-button"><img id="btn4-img" class="btn-img" src="/" /></a>
+                <a id="modal-btn5" class="modal-button"><img id="btn5-img" class="btn-img" src="/" /></a>
+                <a id="modal-btn6" class="modal-button"><img id="btn6-img" class="btn-img" src="/" /></a>
+                <a id="modal-btn7" class="modal-button"><img id="btn7-img" class="btn-img" src="/" /></a>
+                <a id="modal-btn8" class="modal-button"><img id="btn8-img" class="btn-img" src="/" /></a>
+            </div>
         </div>
 
 
@@ -30,16 +32,10 @@
             <!-- Modal content -->
             <div class="modal-content">
 
-                <div class="modal-header">
+                <div class="modal-body">
+                    <div class="modal-body-content">
 
                     <span class="close">&times;</span>
-
-                    <h2>Top</h2>
-
-                </div>
-
-                <div class="modal-body">
-                    
                     <p id="product-name">ProductName</p>
 
                     <img src="/" id="product-img" />
@@ -51,24 +47,11 @@
 
                     </div>
 
-                </div>
-                <div class="modal-footer">
-
                     <h3>Product Details</h3>
 
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. 
-                    It has roots in a piece of classical Latin literature from 45 BC, 
-                    making it over 2000 years old. Richard McClintock, 
-                    a Latin professor at Hampden-Sydney College in Virginia, 
-                    looked up one of the more obscure Latin words, consectetur, 
-                    from a Lorem Ipsum passage, and going through the cites of the word in 
-                    classical literature, discovered the undoubtable source. Lorem Ipsum 
-                    comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" 
-                    (The Extremes of Good and Evil) by Cicero, written in 45 BC. 
-                    This book is a treatise on the theory of ethics, very popular during 
-                    the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit 
-                    amet..", comes from a line in section 1.10.32.</p>
+                    <p id="product-details"></p>
 
+                    </div> 
                 </div>
 
             </div>
@@ -80,6 +63,11 @@
 
         // Get the button that opens the modal
         var btn = document.querySelector("#modal-btn1");
+        const modalBtnArray = ['modal-btn1',
+            'modal-btn2', 'modal-btn3',
+            'modal-btn4', 'modal-btn5',
+            'modal-btn6', 'modal-btn7',
+            'modal-btn8']
 
         // Get the <span> element that closes the modal
         var span = document.querySelector(".close");
@@ -89,23 +77,206 @@
         // Get the product image and name
         var productName = document.querySelector("#product-name");
         var productImg = document.querySelector("#product-img");
+        var productDetails = document.querySelector('#product-details');
 
         // Get the purchase and size buttons
         var sizeBtn = document.querySelector("#size-btn");
         var purchaseBtn = document.querySelector("#purchase-btn");
 
-        const mal = {
-            name: "",
-            img: "",
-            details: "",
-            amount: "",
-            sizes: [],
+        const btnArray = ['btn1-img',
+            'btn2-img', 'btn3-img',
+            'btn4-img', 'btn5-img',
+            'btn6-img', 'btn7-img',
+            'btn8-img'];
+
+        const shoePics = ['https://img01.ztat.net/article/spp-media-p1/bec296b6bc4038adaecfe314d6ab16fe/c1ad99cb2adf44b38510d9fc1c18d34d.jpg?imwidth=762&filter=packshot',
+            'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/78e78695-74ab-4162-b052-67f004aad13b/air-max-270-g-golf-shoe-3GkJ0N.png',
+            'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/11cd6eeb-0966-48b0-8c18-2c0567453603/air-max-2021-se-sko-3vtR0G.png',
+            'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/e8e530a3-2317-4783-819b-40860281daaf/zoomx-streakfly-konkurransesko-vei-wWhMKs.png',
+            'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/4d0bb813-9e8c-4985-a096-3796e21546eb/air-vapormax-2021-fk-herresko-DgPVmr.png',
+            'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/a17c1c96-1088-4ea6-bd8d-be5e8dca2110/zoomx-vaporfly-next-2-konkurransesko-vei-dxSLFw.png',
+            'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/8104583d-cda7-4439-9259-4ff9c6f9fd20/react-infinity-run-flyknit-3-lopesko-vei-Rxz40r.png',
+            'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/ad83f08e-c191-46d4-80ad-c3d5873fe879/air-zoom-terra-kiger-8-terrenglopesko-D6vrh1.png'];
+
+        /*  const mal = {
+                name: "",
+                img: "",
+                details: "",
+                amount: "",
+                sizes: ["", "", ""],
+            }*/
+
+        //items
+        //#region
+        let item1 = {
+            'name': 'item1',
+            'img': shoePics[0],
+            'details': 'good shoes from nike',
+            'price': 25,
+            'amount': 10,
+            'sizes': ['5', '10', '15'],
+        };
+        let item2 = {
+            'name': 'item2',
+            'img': shoePics[1],
+            'details': 'good shoes from nike',
+            'price': 30,
+            'amount': 10,
+            'sizes': ['5', '10', '15'],
+        };
+        let item3 = {
+            'name': 'item3',
+            'img': shoePics[2],
+            'details': 'good shoes from nike',
+            'price': 22,
+            'amount': 10,
+            'sizes': ['5', '10', '15'],
+        };
+        let item4 = {
+            'name': 'item4',
+            'img': shoePics[3],
+            'details': 'good shoes from nike',
+            'price': 41,
+            'amount': 10,
+            'sizes': ['5', '10', '15'],
+        };
+        let item5 = {
+            'name': 'item5',
+            'img': shoePics[4],
+            'details': 'good shoes from nike',
+            'price': 18,
+            'amount': 10,
+            'sizes': ['5', '10', '15'],
+        };
+        let item6 = {
+            'name': 'item6',
+            'img': shoePics[5],
+            'details': 'good shoes from nike',
+            'price': 43,
+            'amount': 10,
+            'sizes': ['5', '10', '15'],
+        };
+        let item7 = {
+            'name': 'item7',
+            'img': shoePics[6],
+            'details': 'good shoes from nike',
+            'price': 24,
+            'amount': 10,
+            'sizes': ['5', '10', '15'],
+        };
+        let item8 = {
+            'name': 'item8',
+            'img': shoePics[7],
+            'details': 'good shoes from nike',
+            'price': 37,
+            'amount': 10,
+            'sizes': ['5', '10', '15'],
+        };
+        //#endregion
+
+        const items = [item1, item2, item3, item4, item5, item6, item7, item8];
+
+        // Insert image of product onto modal-btn
+        let i = 0;
+        function loadStorePage() {
+            for (const element of btnArray) {
+                btnNow = document.getElementById(element);
+                if (btnNow != null) {
+                    btnNow.src = shoePics[i];
+                    btnNow.style.height = '200px';
+                    btnNow.style.width = '200px';
+                }
+                i = i + 1;
+            }
+            
         }
 
+        // Start loadStorePage
+        window.onload = loadStorePage;
+
         // When the user clicks on the button, open the modal
-        btn.addEventListener('click', () => {
+        //#region
+        document.getElementById(modalBtnArray[0]).addEventListener('click', () => {
             modal.style.display = "block";
+            let item = items.find(item1 => item1.name === "item1");
+            productName.innerHTML = item.name;
+            productImg.src = item.img;
+            productImg.style.height = '200px';
+            productImg.style.width = '200px';
+            productDetails.innerHTML = item.details;
+            purchaseBtn.innerHTML = 'Buy for $' + item.price;
         })        
+        document.getElementById(modalBtnArray[1]).addEventListener('click', () => {
+            modal.style.display = "block";
+            let item = items.find(item2 => item2.name === "item2");
+            productName.innerHTML = item.name;
+            productImg.src = item.img;
+            productImg.style.height = '200px';
+            productImg.style.width = '200px';
+            productDetails.innerHTML = item.details;
+            purchaseBtn.innerHTML = 'Buy for $' + item.price;
+        })        
+        document.getElementById(modalBtnArray[2]).addEventListener('click', () => {
+            modal.style.display = "block";
+            let item = items.find(item3 => item3.name === "item3");
+            productName.innerHTML = item.name;
+            productImg.src = item.img;
+            productImg.style.height = '200px';
+            productImg.style.width = '200px';
+            productDetails.innerHTML = item.details;
+            purchaseBtn.innerHTML = 'Buy for $' + item.price;
+        })
+        document.getElementById(modalBtnArray[3]).addEventListener('click', () => {
+            modal.style.display = "block";
+            let item = items.find(item4 => item4.name === "item4");
+            productName.innerHTML = item.name;
+            productImg.src = item.img;
+            productImg.style.height = '200px';
+            productImg.style.width = '200px';
+            productDetails.innerHTML = item.details;
+            purchaseBtn.innerHTML = 'Buy for $' + item.price;
+        })
+        document.getElementById(modalBtnArray[4]).addEventListener('click', () => {
+            modal.style.display = "block";
+            let item = items.find(item5 => item5.name === "item5");
+            productName.innerHTML = item.name;
+            productImg.src = item.img;
+            productImg.style.height = '200px';
+            productImg.style.width = '200px';
+            productDetails.innerHTML = item.details;
+            purchaseBtn.innerHTML = 'Buy for $' + item.price;
+        })
+        document.getElementById(modalBtnArray[5]).addEventListener('click', () => {
+            modal.style.display = "block";
+            let item = items.find(item6 => item6.name === "item6");
+            productName.innerHTML = item.name;
+            productImg.src = item.img;
+            productImg.style.height = '200px';
+            productImg.style.width = '200px';
+            productDetails.innerHTML = item.details;
+            purchaseBtn.innerHTML = 'Buy for $' + item.price;
+        })
+        document.getElementById(modalBtnArray[6]).addEventListener('click', () => {
+            modal.style.display = "block";
+            let item = items.find(item7 => item7.name === "item7");
+            productName.innerHTML = item.name;
+            productImg.src = item.img;
+            productImg.style.height = '200px';
+            productImg.style.width = '200px';
+            productDetails.innerHTML = item.details;
+            purchaseBtn.innerHTML = 'Buy for $' + item.price;
+        })
+        document.getElementById(modalBtnArray[7]).addEventListener('click', () => {
+            modal.style.display = "block";
+            let item = items.find(item8 => item8.name === "item8");
+            productName.innerHTML = item.name;
+            productImg.src = item.img;
+            productImg.style.height = '200px';
+            productImg.style.width = '200px';
+            productDetails.innerHTML = item.details;
+            purchaseBtn.innerHTML = 'Buy for $' + item.price;
+        })
+        //#endregion
 
         // When the user clicks on <span> (x), close the modal
         span.addEventListener('click', () => {
