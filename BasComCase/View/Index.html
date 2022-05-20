@@ -43,8 +43,20 @@
                     <div class="modal-btn-wrapper">
 
                         <a id="size-btn">Size</a>
-                        <a id="purchase-btn">Purchase</a>         
 
+
+                        <a id="purchase-btn">Purchase</a>        
+
+                    </div>
+                    <div id="sizelist">
+                        <ul>
+                            <li id="size0"><a id="a-size0"></a></li>
+                            <li id="size1"><a id="a-size1"></a></li>
+                            <li id="size2"><a id="a-size2"></a></li>
+                            <li id="size3"><a id="a-size3"></a></li>
+                            <li id="size4"><a id="a-size4"></a></li>
+                            <li id="size5"><a id="a-size5"></a></li>
+                        </ul>
                     </div>
 
                     <h3>Product Details</h3>
@@ -82,6 +94,9 @@
         // Get the purchase and size buttons
         var sizeBtn = document.querySelector("#size-btn");
         var purchaseBtn = document.querySelector("#purchase-btn");
+
+        // Get the sizelist 
+        var sizeList = document.querySelector('#sizelist');
 
         const btnArray = ['btn1-img',
             'btn2-img', 'btn3-img',
@@ -122,7 +137,7 @@
             'details': 'good shoes from nike',
             'price': 30,
             'amount': 10,
-            'sizes': ['5', '10', '15'],
+            'sizes': ['8', '10', '15'],
         };
         let item3 = {
             'name': 'item3',
@@ -130,7 +145,7 @@
             'details': 'good shoes from nike',
             'price': 22,
             'amount': 10,
-            'sizes': ['5', '10', '15'],
+            'sizes': ['5', '15', '17'],
         };
         let item4 = {
             'name': 'item4',
@@ -138,7 +153,7 @@
             'details': 'good shoes from nike',
             'price': 41,
             'amount': 10,
-            'sizes': ['5', '10', '15'],
+            'sizes': ['5', '10', '11'],
         };
         let item5 = {
             'name': 'item5',
@@ -146,7 +161,7 @@
             'details': 'good shoes from nike',
             'price': 18,
             'amount': 10,
-            'sizes': ['5', '10', '15'],
+            'sizes': ['5', '10', '17'],
         };
         let item6 = {
             'name': 'item6',
@@ -154,7 +169,7 @@
             'details': 'good shoes from nike',
             'price': 43,
             'amount': 10,
-            'sizes': ['5', '10', '15'],
+            'sizes': ['6', '10', '15'],
         };
         let item7 = {
             'name': 'item7',
@@ -162,7 +177,7 @@
             'details': 'good shoes from nike',
             'price': 24,
             'amount': 10,
-            'sizes': ['5', '10', '15'],
+            'sizes': ['5', '12', '15'],
         };
         let item8 = {
             'name': 'item8',
@@ -170,7 +185,7 @@
             'details': 'good shoes from nike',
             'price': 37,
             'amount': 10,
-            'sizes': ['5', '10', '15'],
+            'sizes': ['5', '11', '15'],
         };
         //#endregion
 
@@ -196,6 +211,7 @@
 
         // When the user clicks on the button, open the modal
         //#region
+        let currentItem = 0;
         document.getElementById(modalBtnArray[0]).addEventListener('click', () => {
             modal.style.display = "block";
             let item = items.find(item1 => item1.name === "item1");
@@ -205,6 +221,7 @@
             productImg.style.width = '200px';
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
+            currentItem = 1;
         })        
         document.getElementById(modalBtnArray[1]).addEventListener('click', () => {
             modal.style.display = "block";
@@ -215,6 +232,7 @@
             productImg.style.width = '200px';
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
+            currentItem = 2;
         })        
         document.getElementById(modalBtnArray[2]).addEventListener('click', () => {
             modal.style.display = "block";
@@ -225,6 +243,7 @@
             productImg.style.width = '200px';
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
+            currentItem = 3;
         })
         document.getElementById(modalBtnArray[3]).addEventListener('click', () => {
             modal.style.display = "block";
@@ -235,6 +254,7 @@
             productImg.style.width = '200px';
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
+            currentItem = 4;
         })
         document.getElementById(modalBtnArray[4]).addEventListener('click', () => {
             modal.style.display = "block";
@@ -245,6 +265,7 @@
             productImg.style.width = '200px';
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
+            currentItem = 5;
         })
         document.getElementById(modalBtnArray[5]).addEventListener('click', () => {
             modal.style.display = "block";
@@ -255,6 +276,7 @@
             productImg.style.width = '200px';
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
+            currentItem = 6;
         })
         document.getElementById(modalBtnArray[6]).addEventListener('click', () => {
             modal.style.display = "block";
@@ -265,6 +287,7 @@
             productImg.style.width = '200px';
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
+            currentItem = 7;
         })
         document.getElementById(modalBtnArray[7]).addEventListener('click', () => {
             modal.style.display = "block";
@@ -275,8 +298,65 @@
             productImg.style.width = '200px';
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
+            currentItem = 8;
         })
         //#endregion
+
+        let active = false;
+        sizeBtn.addEventListener('click', () => {
+            if (!active) {
+                sizeList.style.display = "block";
+                active = true;
+                var sizeArray = [];
+                // warning! If-spam here!
+                //#region
+                if (currentItem == 1) {
+                    let found = items.find(item1 => item1.name === "item1");
+                    sizeArray.push(found.sizes);
+                }
+
+                if (currentItem == 2) {
+                    let found = items.find(item2 => item2.name === "item2");
+                    sizeArray.push(found.sizes);
+                }
+
+                if (currentItem == 3) {
+                    let found = items.find(item3 => item3.name === "item3");
+                    sizeArray.push(found.sizes);
+                }
+
+                if (currentItem == 4) {
+                    let found = items.find(item4 => item4.name === "item4");
+                    sizeArray.push(found.sizes);
+                }
+
+                if (currentItem == 5) {
+                    let found = items.find(item5 => item5.name === "item5");
+                    sizeArray.push(found.sizes);
+                }
+
+                if (currentItem == 6) {
+                    let found = items.find(item6 => item6.name === "item6");
+                    sizeArray.push(found.sizes);
+                }
+
+                if (currentItem == 7) {
+                    let found = items.find(item7 => item7.name === "item7");
+                    sizeArray.push(found.sizes);
+                }
+
+                if (currentItem == 8) {
+                    let found = items.find(item8 => item8.name === "item8");
+                    sizeArray.push(found.sizes);
+                }
+                console.log(sizeArray);
+            }
+            else {
+                sizeList.style.display = "none";
+                active = false;
+            }
+
+        })
 
         // When the user clicks on <span> (x), close the modal
         span.addEventListener('click', () => {
@@ -288,7 +368,8 @@
                 modal.style.display = "none";
             }
         })
-       
+
+        
     </script>
 </body>
 </html>

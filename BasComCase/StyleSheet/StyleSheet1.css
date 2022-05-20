@@ -56,12 +56,12 @@
     position: relative;
     background-color: #fefefe;
     margin: auto;
-    padding: 0;
-    width: 30%;
+    padding: 8px 0;
+    width: 10%;
+    min-width: 250px;
     top: 20vh;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
-    border-radius: 4px;
-    border-bottom: 10px solid #dedede;
+    border-radius: 4px;    
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: 0.4s;
     animation-name: slideIn;
@@ -74,13 +74,12 @@
 }
 
 .modal-body-content {
-    padding: 2px 16px;
     height: 50%;
     width: auto;
 }
 
 .modal-body-content #product-name {
-    padding: 8px 0;
+    padding: 10px 0 12px 0;
 }
 
 .modal-btn-wrapper {
@@ -96,6 +95,7 @@
         transition: 0.5s ease;
         margin: 8px 0 ;
         border-radius: 4px;
+        z-index: 5;
     }
 
         .modal-btn-wrapper a:hover,
@@ -138,12 +138,63 @@
         transition: 0.5s ease;
     }
 
+/* Size button styles */
+
+
+#sizelist {
+    display: none;
+    color: white;
+    background-color: #222;
+    position: absolute;
+    max-width: 30px;
+    margin-left: 10%;
+    transform: translateY(-10%);
+    text-align: center;
+    padding: 5px;
+    z-index: 4;
+}
+    #sizelist ul {
+        display: block;
+    }
+
+#size0 {
+    display: contents;
+}
+
+#size1 {
+    display: contents;
+}
+
+#size2 {
+    display: contents;
+}
+
+#size3 {
+    display: contents;
+}
+
+#size4 {
+    display: contents;
+}
+
+#size5 {
+    display: contents;
+}
+
+#sizelist.active{
+    display: block;
+}
+
+
+
+/* Responsive Styling */
+
 @media (max-width: 900px) {
     .mbutton-wrapper {
         grid-template-columns: 1fr 1fr;
     }
     .modal-content {
-        width: 40%;
+        min-width: 250px;
     }
 
     @media (max-width: 450px) {
@@ -151,7 +202,7 @@
             grid-template-columns: 1fr;
         }
         .modal-content {
-            width: 80%;
+            min-width: 250px;
         }
     }
 }
