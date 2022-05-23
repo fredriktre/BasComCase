@@ -97,6 +97,14 @@
 
         // Get the sizelist 
         var sizeList = document.querySelector('#sizelist');
+        var size0 = document.querySelector('#size0');
+        var size1 = document.querySelector('#size1');
+        var size2 = document.querySelector('#size2');
+        var size3 = document.querySelector('#size3');
+        var size4 = document.querySelector('#size4');
+        var size5 = document.querySelector('#size5');
+
+        const sizeChoices = [size0, size1, size2, size3, size4, size5];
 
         const btnArray = ['btn1-img',
             'btn2-img', 'btn3-img',
@@ -308,48 +316,26 @@
                 sizeList.style.display = "block";
                 active = true;
                 var sizeArray = [];
-                // warning! If-spam here!
-                //#region
-                if (currentItem == 1) {
-                    let found = items.find(item1 => item1.name === "item1");
-                    sizeArray.push(found.sizes);
+
+                for (element in items) {
+                    var current = items[element];
+                    var joint = "item" + element;
+                    if (element == 7) {
+                        current = items[8];
+                        var joint = "item" + 8;
+                    }
+                    var found = items.find(current => current.name === joint);
+                    sizeArray.push(found);
                 }
 
-                if (currentItem == 2) {
-                    let found = items.find(item2 => item2.name === "item2");
-                    sizeArray.push(found.sizes);
-                }
+                var amount = sizeChoices.length;
 
-                if (currentItem == 3) {
-                    let found = items.find(item3 => item3.name === "item3");
-                    sizeArray.push(found.sizes);
-                }
-
-                if (currentItem == 4) {
-                    let found = items.find(item4 => item4.name === "item4");
-                    sizeArray.push(found.sizes);
-                }
-
-                if (currentItem == 5) {
-                    let found = items.find(item5 => item5.name === "item5");
-                    sizeArray.push(found.sizes);
-                }
-
-                if (currentItem == 6) {
-                    let found = items.find(item6 => item6.name === "item6");
-                    sizeArray.push(found.sizes);
-                }
-
-                if (currentItem == 7) {
-                    let found = items.find(item7 => item7.name === "item7");
-                    sizeArray.push(found.sizes);
-                }
-
-                if (currentItem == 8) {
-                    let found = items.find(item8 => item8.name === "item8");
-                    sizeArray.push(found.sizes);
-                }
-                console.log(sizeArray);
+                amount.forEach(sizeElement => {
+                    for (let element in sizeElement) {
+                        console.log(element + ":" + sizeArray[element]);
+                    }
+                })
+                
             }
             else {
                 sizeList.style.display = "none";
