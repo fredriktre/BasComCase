@@ -67,7 +67,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Script\modal.js" />
     <Content Include="StyleSheet\StyleSheet1.css" />
     <Content Include="View\Index.html" />
     <Content Include="Web.config" />
@@ -87,6 +86,7 @@
   <ItemGroup>
     <Folder Include="Media\Backgrounds\" />
     <Folder Include="Media\Pictures\" />
+    <Folder Include="Script\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

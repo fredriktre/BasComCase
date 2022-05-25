@@ -4,10 +4,60 @@
     <meta charset="utf-8" />
     <title>BasKomCase</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />'
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../StyleSheet/StyleSheet1.css" />
 </head>
 <body>
+    <nav>
+        <div class="nav-list-wrapper">
+            <ul>
+                <li class="nav-link"><a href="https://github.com/fredriktre/BasComCase" target="_blank">Show Code</a></li>
+                <li>                    
+                    <a id="cart">
+                        <!-- https://codepen.io/msaetre/pen/XWQvMv -->
+                        <div class="icon-cart" style="float: left">
+                            <div class="cart-line-1" style="background-color: darkslategray"></div>
+                            <div class="cart-line-2" style="background-color: darkslategray "></div>
+                            <div class="cart-line-3" style="background-color: darkslategray "></div>
+                            <div class="cart-wheel" style="background-color: darkslategray "></div>
+                        </div>
+                        <span id="nav-badge" class="">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="cart-container">
+        <div class="cart-wrapper">
+
+            <div class="cart-header">
+                <div class="icon-cart" style="float: left">
+                    <div class="cart-line-1" style="background-color: darkslategray"></div>
+                    <div class="cart-line-2" style="background-color: darkslategray "></div>
+                    <div class="cart-line-3" style="background-color: darkslategray "></div>
+                    <div class="cart-wheel" style="background-color: darkslategray "></div>
+                </div><span class="badge">0</span>
+                <div class="cart-total">
+                    <span class="cart-text">Total:</span>
+                    <span class="cart-price">$0</span>
+                </div>
+            </div>
+
+            <div class="cart-info">
+                <p>item</p>
+                <p>price</p>
+                <p>size</p>
+                <p>amount</p>
+            </div>
+
+            <ul class="cart-items">   
+
+            </ul>
+
+            <a href="/" class="checkout-button">Checkout</a>
+        </div>
+    </div>
 
     <div class="content-wrapper">
         <!-- Trigger/Open The Modal -->
@@ -35,41 +85,48 @@
                 <div class="modal-body">
                     <div class="modal-body-content">
 
-                    <span class="close">&times;</span>
-                    <p id="product-name">ProductName</p>
+                        <span class="close">&times;</span>
+                        <p id="product-name">ProductName</p>
 
-                    <img src="/" id="product-img" />
+                        <img src="/" id="product-img" />
 
-                    <div class="modal-btn-wrapper">
+                        <div class="modal-btn-wrapper">
 
-                        <a id="size-btn">Size</a>
+                            <a id="size-btn">Size</a>
 
 
-                        <a id="purchase-btn">Purchase</a>        
+                            <a id="purchase-btn">Purchase</a>
+
+                        </div>
+
+                        <div id="sizelist">
+                            <ul>
+                                <li id="size0"><a id="a-size0"></a></li>
+                                <li id="size1"><a id="a-size1"></a></li>
+                                <li id="size2"><a id="a-size2"></a></li>
+                                <li id="size3"><a id="a-size3"></a></li>
+                                <li id="size4"><a id="a-size4"></a></li>
+                                <li id="size5"><a id="a-size5"></a></li>
+                            </ul>
+                        </div>
+
+                        <h3>Product Details</h3>
+
+                        <p id="product-details"></p>
 
                     </div>
-                    <div id="sizelist">
-                        <ul>
-                            <li id="size0"><a id="a-size0"></a></li>
-                            <li id="size1"><a id="a-size1"></a></li>
-                            <li id="size2"><a id="a-size2"></a></li>
-                            <li id="size3"><a id="a-size3"></a></li>
-                            <li id="size4"><a id="a-size4"></a></li>
-                            <li id="size5"><a id="a-size5"></a></li>
-                        </ul>
-                    </div>
-
-                    <h3>Product Details</h3>
-
-                    <p id="product-details"></p>
-
-                    </div> 
                 </div>
 
             </div>
         </div>
     </div>
     <script>
+        // Get cart elements
+        var cart = document.querySelector(".cart-container");
+        var cartBtn = document.querySelector("#cart");
+        var badge = document.querySelector(".badge");
+        var navBadge = document.querySelector("#nav-badge");
+
         // Get the modal
         var modal = document.querySelector("#content-modal");
 
@@ -95,7 +152,7 @@
         var sizeBtn = document.querySelector("#size-btn");
         var purchaseBtn = document.querySelector("#purchase-btn");
 
-        // Get the sizelist 
+        // Get the sizelist
         var sizeList = document.querySelector('#sizelist');
         var size0 = document.querySelector('#size0');
         var size1 = document.querySelector('#size1');
@@ -104,14 +161,21 @@
         var size4 = document.querySelector('#size4');
         var size5 = document.querySelector('#size5');
 
+        // collect the sizes
         const sizeChoices = [size0, size1, size2, size3, size4, size5];
 
+        // Get the buttons
         const btnArray = ['btn1-img',
             'btn2-img', 'btn3-img',
             'btn4-img', 'btn5-img',
             'btn6-img', 'btn7-img',
             'btn8-img'];
 
+        const aSizes = ['a-size0',
+            'a-size1', 'a-size2',
+            'a-size3', 'a-size4',
+            'a-size5'];
+        // Here are the pictures
         const shoePics = ['https://img01.ztat.net/article/spp-media-p1/bec296b6bc4038adaecfe314d6ab16fe/c1ad99cb2adf44b38510d9fc1c18d34d.jpg?imwidth=762&filter=packshot',
             'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/78e78695-74ab-4162-b052-67f004aad13b/air-max-270-g-golf-shoe-3GkJ0N.png',
             'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/11cd6eeb-0966-48b0-8c18-2c0567453603/air-max-2021-se-sko-3vtR0G.png',
@@ -198,6 +262,8 @@
         //#endregion
 
         const items = [item1, item2, item3, item4, item5, item6, item7, item8];
+        const cartArray = [];
+        const cartSizes = [];
 
         // Insert image of product onto modal-btn
         let i = 0;
@@ -205,13 +271,13 @@
             for (const element of btnArray) {
                 btnNow = document.getElementById(element);
                 if (btnNow != null) {
-                    btnNow.src = shoePics[i];
+                    btnNow.src = items[i].img;
                     btnNow.style.height = '200px';
                     btnNow.style.width = '200px';
                 }
                 i = i + 1;
             }
-            
+
         }
 
         // Start loadStorePage
@@ -222,6 +288,7 @@
         let currentItem = 0;
         document.getElementById(modalBtnArray[0]).addEventListener('click', () => {
             modal.style.display = "block";
+            cart.style.display = "none";
             let item = items.find(item1 => item1.name === "item1");
             productName.innerHTML = item.name;
             productImg.src = item.img;
@@ -230,9 +297,11 @@
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
             currentItem = 1;
-        })        
+
+        })
         document.getElementById(modalBtnArray[1]).addEventListener('click', () => {
             modal.style.display = "block";
+            cart.style.display = "none";
             let item = items.find(item2 => item2.name === "item2");
             productName.innerHTML = item.name;
             productImg.src = item.img;
@@ -241,9 +310,10 @@
             productDetails.innerHTML = item.details;
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
             currentItem = 2;
-        })        
+        })
         document.getElementById(modalBtnArray[2]).addEventListener('click', () => {
             modal.style.display = "block";
+            cart.style.display = "none";
             let item = items.find(item3 => item3.name === "item3");
             productName.innerHTML = item.name;
             productImg.src = item.img;
@@ -255,6 +325,7 @@
         })
         document.getElementById(modalBtnArray[3]).addEventListener('click', () => {
             modal.style.display = "block";
+            cart.style.display = "none";
             let item = items.find(item4 => item4.name === "item4");
             productName.innerHTML = item.name;
             productImg.src = item.img;
@@ -266,6 +337,7 @@
         })
         document.getElementById(modalBtnArray[4]).addEventListener('click', () => {
             modal.style.display = "block";
+            cart.style.display = "none";
             let item = items.find(item5 => item5.name === "item5");
             productName.innerHTML = item.name;
             productImg.src = item.img;
@@ -277,6 +349,7 @@
         })
         document.getElementById(modalBtnArray[5]).addEventListener('click', () => {
             modal.style.display = "block";
+            cart.style.display = "none";
             let item = items.find(item6 => item6.name === "item6");
             productName.innerHTML = item.name;
             productImg.src = item.img;
@@ -288,6 +361,7 @@
         })
         document.getElementById(modalBtnArray[6]).addEventListener('click', () => {
             modal.style.display = "block";
+            cart.style.display = "none";
             let item = items.find(item7 => item7.name === "item7");
             productName.innerHTML = item.name;
             productImg.src = item.img;
@@ -299,6 +373,7 @@
         })
         document.getElementById(modalBtnArray[7]).addEventListener('click', () => {
             modal.style.display = "block";
+            cart.style.display = "none";
             let item = items.find(item8 => item8.name === "item8");
             productName.innerHTML = item.name;
             productImg.src = item.img;
@@ -308,34 +383,116 @@
             purchaseBtn.innerHTML = 'Buy for $' + item.price;
             currentItem = 8;
         })
-        //#endregion
+        //#endregion        
 
+        // Open Cart 
+         var cartitemlist = document.querySelector(".cart-items");
+         var cartPriceTag = document.querySelector(".cart-price");
+        let cartOpen = false;
+        cartBtn.addEventListener('click', () => {
+            if (!cartOpen) {
+                cart.style.display = "block";
+                cartOpen = true;
+                let i = 1;
+                var totalPrice = 0;
+
+
+                for (element of cartArray) {
+                    var idToGive = "ci" + i;
+                    var cartItemName = cartArray[i - 1].name;
+                    counts = cartArray.reduce((c, { name: cartItemName }) => (c[cartItemName] = (c[cartItemName] || 0) + 1, c), {});
+                    //#region
+
+                    /*var getIndex = counts[i - 1];
+                    if (getIndex > 1) {
+                        let item = items.find(cartItemName => cartItemName === cartItemName);
+                        var countsName = item.name;
+                        console.log(countsName);
+                    }*/
+
+                    var clearfix = document.createElement('li');
+                    var clearImg = document.createElement('img');
+                    var clearItems = document.createElement('div');
+                    var itemName = document.createElement('span');
+                    var itemPrice = document.createElement('span');
+                    var itemSize = document.createElement('span');
+                    var itemQuantity = document.createElement('span');
+                    clearfix.appendChild(clearImg);
+                    clearfix.appendChild(clearItems);
+                    clearItems.appendChild(itemName);
+                    clearItems.appendChild(itemPrice);
+                    clearItems.appendChild(itemSize);
+                    clearItems.appendChild(itemQuantity);
+                    clearfix.classList.add("clearfix");
+                    clearfix.setAttribute('id', idToGive);
+                    clearImg.src = cartArray[i - 1].img;
+                    clearItems.classList.add("clearfix-items");
+                    itemName.classList.add("item-name");
+                    itemName.innerHTML = cartItemName;
+                    itemPrice.classList.add("item-price");
+                    itemPrice.innerHTML = "$" + cartArray[i - 1].price;
+                    itemSize.classList.add("item-size");
+                    itemSize.innerHTML = cartSizes[i - 1];
+                    itemQuantity.classList.add("item-quantity");
+                    itemQuantity.innerHTML = "x?";
+                    cartitemlist.appendChild(clearfix);
+                    //#endregion
+
+                    totalPrice = totalPrice + cartArray[i - 1].price;
+
+                    i++;
+                }
+                console.log(counts);
+                cartPriceTag.innerHTML = "$" + totalPrice;
+            }
+            else {
+                cart.style.display = "none";
+                cartOpen = false;
+                let j = 1
+                for (element of cartArray) {
+                    var idToRemove = "#ci" + j;
+                    var clearfixed = document.querySelector(idToRemove);
+                    cartitemlist.removeChild(clearfixed);
+                    j++;
+                }
+            }
+
+        })
+
+        // When the user clicks on size button, open sizeList
         let active = false;
         sizeBtn.addEventListener('click', () => {
             if (!active) {
-                sizeList.style.display = "block";
+                sizeList.style.display = "inline-block";
                 active = true;
-                var sizeArray = [];
 
-                for (element in items) {
-                    var current = items[element];
-                    var joint = "item" + element;
-                    if (element == 7) {
-                        current = items[8];
-                        var joint = "item" + 8;
+                //#region
+                /* for (element in items) {
+                     var current = items[element];
+                     var joint = "item" + element;
+                     if (element == 7) {
+                         current = items[8];
+                         var joint = "item" + 8;
+                     }
+                     var found = items.find(current => current.name === joint);
+                     sizeArray.push(found);
+                 }*/
+                //#endregion
+
+                let u = 0;
+                for (element in sizeChoices) {
+                    var current = items[currentItem].sizes[u];
+                    if (current != null) {
+                        var aSize = document.getElementById(aSizes[u]);
+                        u++;
+                        aSize.innerHTML = current;
+                        sizeChoices[element].style.display = "block";
                     }
-                    var found = items.find(current => current.name === joint);
-                    sizeArray.push(found);
+                    else {
+                        sizeChoices[element].style.display = "none";
+                    }
                 }
 
-                var amount = sizeChoices.length;
-
-                amount.forEach(sizeElement => {
-                    for (let element in sizeElement) {
-                        console.log(element + ":" + sizeArray[element]);
-                    }
-                })
-                
             }
             else {
                 sizeList.style.display = "none";
@@ -343,19 +500,83 @@
             }
 
         })
+        //#region
+        // if a size is clicked
+        let chosenSize = 0;
+        document.getElementById(aSizes[0]).addEventListener('click', () => {
+            var getAnchor = document.getElementById(aSizes[0]);
+            chosenSize = getAnchor.innerHTML;
+            sizeList.style.display = "none";
+            active = false;
+        })
+        document.getElementById(aSizes[1]).addEventListener('click', () => {
+            var getAnchor = document.getElementById(aSizes[1]);
+            chosenSize = getAnchor.innerHTML;
+            sizeList.style.display = "none";
+            active = false;
+        })
+        document.getElementById(aSizes[2]).addEventListener('click', () => {
+            var getAnchor = document.getElementById(aSizes[2]);
+            chosenSize = getAnchor.innerHTML;
+            sizeList.style.display = "none";
+            active = false;
+        })
+        document.getElementById(aSizes[3]).addEventListener('click', () => {
+            var getAnchor = document.getElementById(aSizes[3]);
+            chosenSize = getAnchor.innerHTML;
+            sizeList.style.display = "none";
+            active = false;
+        })
+        document.getElementById(aSizes[4]).addEventListener('click', () => {
+            var getAnchor = document.getElementById(aSizes[4]);
+            chosenSize = getAnchor.innerHTML;
+            sizeList.style.display = "none";
+            active = false;
+        })
+        document.getElementById(aSizes[5]).addEventListener('click', () => {
+            var getAnchor = document.getElementById(aSizes[5]);
+            chosenSize = getAnchor.innerHTML;
+            sizeList.style.display = "none";
+            active = false;
+        })
+        //#endregion
+
+        // When the user clicks the purchasebtn, respond and return.
+        let pActive = false;
+        purchaseBtn.addEventListener('click', () => {
+            if (!pActive) {
+                pActive = true;
+                var currentText = purchaseBtn.innerHTML;
+                purchaseBtn.innerHTML = "&checkmark;"
+                let joint = "item" + currentItem;
+                let addCurrent = items[currentItem];
+                setTimeout(() => { purchaseBtn.innerHTML = currentText; }, 1000);
+                cartArray[cartArray.length] = items.find(addCurrent => addCurrent.name === joint);
+                cartSizes[cartSizes.length] = chosenSize;
+                setTimeout(() => { pActive = false }, 500);
+                console.log(cartArray)
+                badge.innerHTML = cartArray.length;
+
+                if (cartArray.length > 0) {
+                    navBadge.classList = ("show-badge");
+                    navBadge.innerHTML = cartArray.length;
+                }
+            }
+        })
 
         // When the user clicks on <span> (x), close the modal
         span.addEventListener('click', () => {
             modal.style.display = "none";
-        })      
+        })
 
         window.addEventListener('click', (event) => {
             if (event.target == modal) {
                 modal.style.display = "none";
+                sizeList.style.display = "none";
             }
         })
 
-        
+
     </script>
 </body>
 </html>
